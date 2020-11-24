@@ -7,5 +7,5 @@ class HeroDetailFragmentViewModel
 @Inject constructor() : ViewModel() {
 
     // TODO return hero details
-    suspend fun getHeroeDetails() = null
+    suspend fun getHeroeDetails(heroName: String) = null
 }

@@ -27,5 +27,9 @@
 		android:id="@+id/heroesDetailFragment"
 		android:name="com.png.interview.ui.heroes.HeroDetailFragment"
 		android:label="HeroesDetailFragment"
-		tools:layout="@layout/fragment_heroes_detail" />
+		tools:layout="@layout/fragment_heroes_detail">
+		<argument
+			android:name="heroName"
+			app:argType="string" />
+	</fragment>
 </navigation>

@@ -16,6 +16,7 @@
 		android:layout_marginStart="16dp"
 		android:layout_marginEnd="16dp"
 		android:layout_marginBottom="16dp"
+		android:onClick="@{()-> viewBinder.clicked()}"
 		app:cardElevation="4dp">
 
 		<androidx.constraintlayout.widget.ConstraintLayout

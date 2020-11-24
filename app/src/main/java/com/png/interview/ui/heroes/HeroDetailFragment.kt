@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 
 import com.png.interview.databinding.FragmentHeroesDetailBinding
 import com.png.interview.extensions.onMain
@@ -31,10 +32,12 @@ class HeroDetailFragment : InjectedFragment() {
         val binding = FragmentHeroesDetailBinding.inflate(inflater, container, false)
         binding.viewBinder = viewBinder
         binding.lifecycleOwner = viewLifecycleOwner
+        val args by navArgs<HeroDetailFragmentArgs>()
 
+        val heroName = args.heroName
         val viewModel = getViewModel<HeroDetailFragmentViewModel>()
         viewLifecycleScope.launch(Dispatchers.IO) {
-            viewModel.getHeroeDetails().let {
+            viewModel.getHeroeDetails(heroName).let {
                 onMain {
                     viewBinder.bind(it)
                 }
