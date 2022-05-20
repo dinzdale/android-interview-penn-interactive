@@ -48,6 +48,15 @@
 			app:emptyVisible="@{viewBinder.isEmpty}"
 			app:layout_constraintTop_toBottomOf="@id/et_input" />
 
+		<include
+			layout="@layout/view_current_weather_error"
+			android:id="@+id/view_current_weather_error"
+			android:layout_height="200dp"
+			android:layout_width="match_parent"
+			android:layout_marginTop="8dp"
+			app:errorVisible="@{viewBinder.isError}"
+			app:layout_constraintTop_toBottomOf="@id/et_input" />
+
 		<androidx.constraintlayout.widget.Barrier
 			android:id="@+id/content_barrier"
 			android:layout_width="0dp"

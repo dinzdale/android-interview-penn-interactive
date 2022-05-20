@@ -31,4 +31,9 @@ class CurrentWeatherViewModel @Inject constructor(
         _currentWeatherViewRepresentation
             .map { it is CurrentWeatherViewRepresentation.Empty }
             .asLiveData()
+
+    val isErrorVisible =
+        _currentWeatherViewRepresentation
+            .map { it is CurrentWeatherViewRepresentation.Error }
+            .asLiveData()
 }

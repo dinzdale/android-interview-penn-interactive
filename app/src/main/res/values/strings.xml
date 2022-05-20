@@ -2,6 +2,7 @@
 	<string name="app_name">Interview Project</string>
 	<string name="network_error">Network Error</string>
 	<string name="network_error_retry">Please reconnect to the internet and try again.</string>
+	<string name="location_entry_error">Error occurred retrieving weather information</string>
 	<string name="unexpected_error_occurred_body">An error has occurred during your operation, please contact support.</string>
 	<string name="alert_error_title">Something went wrong!</string>
 	<string name="alert_error_title_relaxed">Something went wrong.</string>
