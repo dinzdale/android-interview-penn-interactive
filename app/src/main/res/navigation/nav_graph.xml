@@ -11,10 +11,22 @@
 		<action
 			android:id="@+id/action_current_weather_fragment_to_settingsFragment"
 			app:destination="@id/settingsFragment" />
+		<action
+			android:id="@+id/action_current_weather_fragment_to_forecastWeatherFragment"
+			app:destination="@id/forecastWeatherFragment" />
 	</fragment>
 	<fragment
 		android:id="@+id/settingsFragment"
 		android:name="com.png.interview.weather.ui.fragment.SettingsFragment"
 		android:label="SettingsFragment"
 		tools:layout="@layout/fragment_settings" />
+	<fragment
+		android:id="@+id/forecastWeatherFragment"
+		android:name="com.png.interview.weather.ui.fragment.ForecastWeatherFragment"
+		android:label="fragment_forecast_weather"
+		tools:layout="@layout/fragment_forecast_weather" >
+		<action
+			android:id="@+id/action_forecastWeatherFragment_to_current_weather_fragment"
+			app:destination="@id/current_weather_fragment" />
+	</fragment>
 </navigation>

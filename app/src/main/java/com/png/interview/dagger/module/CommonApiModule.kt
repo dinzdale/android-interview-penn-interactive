@@ -4,6 +4,8 @@ import android.app.Application
 
 import com.png.interview.api.common_model.NetworkResponseAdapterFactory
 import com.png.interview.dagger.scope.ApplicationScope
+import com.png.interview.weather.api.ForecastRepository
+import com.png.interview.weather.api.WeatherApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -12,6 +14,7 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import java.util.Date
+import javax.inject.Inject
 import javax.inject.Qualifier
 
 @Module
@@ -33,6 +36,7 @@ class CommonApiModule {
             .Builder()
             .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
             .add(KotlinJsonAdapterFactory())
+
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)

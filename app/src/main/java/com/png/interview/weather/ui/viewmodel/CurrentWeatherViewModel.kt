@@ -3,6 +3,7 @@ package com.png.interview.weather.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.png.interview.weather.api.ForecastRepository
 import com.png.interview.weather.domain.CreateCurrentWeatherRepFromQueryUseCase
 import com.png.interview.weather.ui.model.CurrentWeatherViewRepresentation
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,14 +14,16 @@ import javax.inject.Inject
 class CurrentWeatherViewModel @Inject constructor(
     private val createCurrentWeatherRepFromQueryUseCase: CreateCurrentWeatherRepFromQueryUseCase
 ) : ViewModel() {
-
+    private val _enteredLocation = MutableStateFlow<String?>(null)
     private val _currentWeatherViewRepresentation = MutableStateFlow<CurrentWeatherViewRepresentation>(CurrentWeatherViewRepresentation.Empty)
 
     fun submitCurrentWeatherSearch(query: String) {
         viewModelScope.launch {
             _currentWeatherViewRepresentation.value = createCurrentWeatherRepFromQueryUseCase(query)
+            _enteredLocation.value = query
         }
     }
+
 
     val availableCurrentWeatherLiveData =
         _currentWeatherViewRepresentation
@@ -36,4 +39,10 @@ class CurrentWeatherViewModel @Inject constructor(
         _currentWeatherViewRepresentation
             .map { it is CurrentWeatherViewRepresentation.Error }
             .asLiveData()
+
+    fun getThreeDayForecast() {
+        viewModelScope.launch {
+
+        }
+    }
 }
