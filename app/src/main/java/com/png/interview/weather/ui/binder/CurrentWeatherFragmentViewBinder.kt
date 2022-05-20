@@ -16,9 +16,12 @@ class CurrentWeatherFragmentViewBinder(
 
     var input: String = ""
 
-    fun refreshClicked() {
-        Toast.makeText(activity, "Refresh Clicked TODO", Toast.LENGTH_LONG).show()
-    }
+    /**
+     * Re-use go locking for refresh
+     */
+//    fun refreshClicked() {
+//        //Toast.makeText(activity, "Refresh Clicked TODO", Toast.LENGTH_LONG).show()
+//    }
 
     fun seeForecastClicked() {
         Toast.makeText(activity, "Forecast Clicked TODO", Toast.LENGTH_LONG).show()
@@ -28,7 +31,7 @@ class CurrentWeatherFragmentViewBinder(
         settingsAction()
     }
 
-    fun goClicked() {
+    fun goRefreshClicked() {
         if (input.isEmpty()) {
             Toast.makeText(activity, "Please Enter Query", Toast.LENGTH_LONG).show()
         } else if (input.length < 3) {

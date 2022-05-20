@@ -1,5 +1,6 @@
 package com.png.interview.weather.di
 
+import com.localebro.okhttpprofiler.OkHttpProfilerInterceptor
 import com.png.interview.api.common_model.NetworkResponseAdapterFactory
 import com.png.interview.dagger.scope.ApplicationScope
 import com.png.interview.weather.api.WeatherApi
@@ -38,6 +39,7 @@ class WeatherApiModule {
                                 .build()
                         )
                     }
+                    .addInterceptor(OkHttpProfilerInterceptor())
                     .build()
             )
             .baseUrl(BASE_URL)

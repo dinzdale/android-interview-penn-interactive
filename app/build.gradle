@@ -59,6 +59,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1'
     implementation "androidx.preference:preference-ktx:$androidx_preference_version"
+    implementation 'com.localebro:okhttpprofiler:1.0.8'
     api "com.squareup.okhttp3:okhttp:$okhttp_version"
     api "com.squareup.retrofit2:retrofit:$retrofit_version"
     api "com.squareup.retrofit2:retrofit:$retrofit_version"

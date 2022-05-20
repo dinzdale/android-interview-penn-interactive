@@ -26,7 +26,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/go"
-			android:onClick="@{() -> viewBinder.goClicked()}"
+			android:onClick="@{() -> viewBinder.goRefreshClicked()}"
 			app:layout_constraintTop_toTopOf="parent"
 			app:layout_constraintEnd_toEndOf="parent" />
 
@@ -70,7 +70,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="8dp"
 			android:text="@string/refresh"
-			android:onClick="@{() -> viewBinder.refreshClicked()}"
+			android:onClick="@{() -> viewBinder.goRefreshClicked()}"
 			android:layout_marginEnd="4dp"
 			app:visible="@{viewBinder.availableWeatherViewData != null}"
 			app:layout_goneMarginTop="16dp"

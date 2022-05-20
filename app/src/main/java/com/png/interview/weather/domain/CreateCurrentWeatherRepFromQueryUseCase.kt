@@ -29,7 +29,7 @@ class DefaultCreateCurrentWeatherRepFromQueryUseCase @Inject constructor(
                 )
             }
             else -> {
-                CurrentWeatherViewRepresentation.Error()
+                CurrentWeatherViewRepresentation.Error
             }
         }
     }
