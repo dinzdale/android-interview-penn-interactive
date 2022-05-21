@@ -4,11 +4,11 @@ import com.png.interview.api.common_model.NetworkResponse
 import com.png.interview.weather.ui.model.CurrentWeatherViewRepresentation
 import javax.inject.Inject
 
-class ForecastRepository  (private val weatherApi: WeatherApi) {
-    suspend fun getForecast(query:String)  = weatherApi.getForecast(query,3)?.let { response->
+class AutoCompleteRepository  (private val weatherApi: WeatherApi) {
+    suspend fun getAutocompleteResults(query:String)  = weatherApi.getAutocompleteResults(query).let { response->
             when {
                 response is NetworkResponse.Success->{
-                    CurrentWeatherViewRepresentation.ForecastWeatherViewRep(response.body.forecast)
+                    CurrentWeatherViewRepresentation.AutoCompleteRep(response.body)
                 }
                 else -> CurrentWeatherViewRepresentation.Error
             }
