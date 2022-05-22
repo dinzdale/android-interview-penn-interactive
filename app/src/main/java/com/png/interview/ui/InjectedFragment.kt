@@ -1,6 +1,7 @@
 package com.png.interview.ui
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
@@ -16,6 +17,7 @@ import javax.inject.Inject
 abstract class InjectedFragment : Fragment() {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject lateinit var sharedPreferences: SharedPreferences
     lateinit var fragmentComponent: FragmentComponent
 
     override fun onAttach(context: Context) {
