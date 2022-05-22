@@ -1,7 +1,11 @@
 package com.png.interview.weather.ui.binder
 
 import android.app.Activity
+import android.view.View
+import android.widget.AdapterView
 import android.widget.Toast
+import androidx.databinding.Bindable
+import androidx.databinding.BindingMethod
 import com.png.interview.weather.ui.viewmodel.CurrentWeatherViewModel
 import timber.log.Timber
 
@@ -49,7 +53,6 @@ class CurrentWeatherFragmentViewBinder(
             }
         }
     }
-
 
     fun onTextChanged(text: CharSequence, start: Int, before: Int, count: Int) {
         viewModel.updateLocationEntry(text.toString())

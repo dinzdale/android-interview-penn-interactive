@@ -4,23 +4,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.lifecycle.MediatorLiveData
 import androidx.navigation.fragment.findNavController
 import com.png.interview.databinding.FragmentCurrentWeatherBinding
 import com.png.interview.ui.InjectedFragment
-import com.png.interview.weather.api.model.AutoCompleteResponse
+import com.png.interview.weather.api.model.AutcompleteResponseItem
 import com.png.interview.weather.ui.binder.CurrentWeatherFragmentViewBinder
 import com.png.interview.weather.ui.viewmodel.CurrentWeatherViewModel
-import kotlinx.android.synthetic.main.activity_main.mainNavigationFragment
 import timber.log.Timber
+import java.lang.Math.max
 
 class CurrentWeatherFragment : InjectedFragment() {
 
-    val autoCompleteResponseMediator =  MediatorLiveData<AutoCompleteResponse>()
+    val autoCompleteResponseMediator =  MediatorLiveData<List<AutcompleteResponseItem>>()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val viewModel = getViewModel<CurrentWeatherViewModel>()
-        val view =  FragmentCurrentWeatherBinding.inflate(inflater, container,false).apply {
+        val binding =  FragmentCurrentWeatherBinding.inflate(inflater, container,false).apply {
             viewBinder = CurrentWeatherFragmentViewBinder(
                 viewModel,
                 requireActivity(),
@@ -32,21 +35,29 @@ class CurrentWeatherFragment : InjectedFragment() {
                 }
             )
             this.lifecycleOwner = viewLifecycleOwner
-        }.root
+        }
 
         autoCompleteResponseMediator.addSource(viewModel.enteredLocation) { enteredText->
             enteredText?.also {
-                autoCompleteResponseMediator.addSource(viewModel.getAutoCompleteList(enteredText)) {
-                    autoCompleteResponseMediator.value = it
+                if (it.length >= 3) {
+                    autoCompleteResponseMediator.addSource(viewModel.getAutoCompleteList(enteredText)) {
+                        autoCompleteResponseMediator.value = it
+                    }
                 }
             }
         }
         autoCompleteResponseMediator.observe(viewLifecycleOwner) {
-            it.forEach {
-                Timber.d(" autocomplete: ${it.name}")
-            }
+            val results = it.map { it.name }.take(5)
+            val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1)
+            adapter.addAll(results)
+            binding.etInput.setAdapter(adapter)
+            binding.etInput.showDropDown()
         }
 
-        return view
+        binding.etInput.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, i, l ->
+            viewModel.updateLocationEntry("")
+            viewModel.submitCurrentWeatherSearch((view as AppCompatTextView).text.toString())
+        }
+        return binding.root
     }
 }

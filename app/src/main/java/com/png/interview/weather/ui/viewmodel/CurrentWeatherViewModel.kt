@@ -5,6 +5,7 @@ import com.png.interview.api.common_model.NetworkResponse
 import com.png.interview.weather.api.AutoCompleteRepository
 import com.png.interview.weather.api.ForecastRepository
 import com.png.interview.weather.api.WeatherApi
+import com.png.interview.weather.api.model.AutcompleteResponseItem
 import com.png.interview.weather.api.model.AutoCompleteResponse
 import com.png.interview.weather.api.model.ForecastResponse
 import com.png.interview.weather.domain.CreateCurrentWeatherRepFromQueryUseCase
@@ -23,7 +24,7 @@ class CurrentWeatherViewModel @Inject constructor(
     private val autoCompleteRepository = AutoCompleteRepository(weatherApi)
 
     private val _enteredLocation = MutableStateFlow<String?>(null)
-    val enteredLocation = _enteredLocation.debounce(1000).asLiveData()
+    val enteredLocation = _enteredLocation.debounce(500).asLiveData()
 
     private val _currentWeatherViewRepresentation = MutableStateFlow<CurrentWeatherViewRepresentation>(CurrentWeatherViewRepresentation.Empty)
     private val _threeDayForecast = MutableStateFlow<CurrentWeatherViewRepresentation>(CurrentWeatherViewRepresentation.Empty)
@@ -54,14 +55,15 @@ class CurrentWeatherViewModel @Inject constructor(
             .asLiveData()
 
 
-    fun getAutoCompleteList(query:String) : LiveData<AutoCompleteResponse>{
-        val result = MutableLiveData<AutoCompleteResponse>()
+    fun getAutoCompleteList(query:String) : LiveData<List<AutcompleteResponseItem>>{
+        val result = MutableLiveData<List<AutcompleteResponseItem>>()
         viewModelScope.launch {
             autoCompleteRepository.getAutocompleteResults(query).also { response->
                 when {
                     response is CurrentWeatherViewRepresentation.AutoCompleteRep ->{
                         result.value = response.data
                     }
+                    //TODO handle network error
                 }
             }
         }
