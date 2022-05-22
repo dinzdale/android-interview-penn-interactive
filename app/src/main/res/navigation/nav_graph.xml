@@ -19,7 +19,11 @@
 		android:id="@+id/settingsFragment"
 		android:name="com.png.interview.weather.ui.fragment.SettingsFragment"
 		android:label="SettingsFragment"
-		tools:layout="@layout/fragment_settings" />
+		tools:layout="@layout/fragment_settings" >
+		<action
+			android:id="@+id/action_settingsFragment_to_current_weather_fragment"
+			app:destination="@id/current_weather_fragment" />
+	</fragment>
 	<fragment
 		android:id="@+id/forecastWeatherFragment"
 		android:name="com.png.interview.weather.ui.fragment.ForecastWeatherFragment"

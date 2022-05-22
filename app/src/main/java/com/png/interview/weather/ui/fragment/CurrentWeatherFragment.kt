@@ -37,6 +37,7 @@ class CurrentWeatherFragment : InjectedFragment() {
             this.lifecycleOwner = viewLifecycleOwner
         }
 
+        autoCompleteResponseMediator.removeSource(viewModel.enteredLocation)
         autoCompleteResponseMediator.addSource(viewModel.enteredLocation) { enteredText->
             enteredText?.also {
                 if (it.length >= 3) {
@@ -56,6 +57,8 @@ class CurrentWeatherFragment : InjectedFragment() {
 
         binding.etInput.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, i, l ->
             viewModel.updateLocationEntry("")
+            autoCompleteResponseMediator.value = emptyList()
+            binding.etInput.dismissDropDown()
             viewModel.submitCurrentWeatherSearch((view as AppCompatTextView).text.toString())
         }
         return binding.root

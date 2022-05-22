@@ -35,16 +35,20 @@
 			app:layout_constraintEnd_toEndOf="parent">
 
 			<RadioButton
+				android:id="@+id/imperial_btn"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/imperial"
-				android:checked="@{viewBinder.isMetric() == false}"/>
+				android:checked="@{viewBinder.isMetric() == false}"
+				android:onClick="@{viewBinder::onClick}"/>
 
 			<RadioButton
+				android:id="@+id/metric_btn"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/metric"
-				android:checked="@{viewBinder.isMetric()}"/>
+				android:checked="@{viewBinder.isMetric()}"
+				android:onClick="@{viewBinder::onClick}"/>
 
 		</RadioGroup>
 
