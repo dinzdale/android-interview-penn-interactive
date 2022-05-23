@@ -14,8 +14,6 @@ import com.png.interview.ui.InjectedFragment
 import com.png.interview.weather.api.model.AutcompleteResponseItem
 import com.png.interview.weather.ui.binder.CurrentWeatherFragmentViewBinder
 import com.png.interview.weather.ui.viewmodel.CurrentWeatherViewModel
-import timber.log.Timber
-import java.lang.Math.max
 
 class CurrentWeatherFragment : InjectedFragment() {
 
@@ -56,7 +54,7 @@ class CurrentWeatherFragment : InjectedFragment() {
         }
 
         binding.etInput.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, i, l ->
-            viewModel.updateLocationEntry("")
+            binding.viewBinder?.resetAndSaveEnteredLocation(binding.etInput.editableText.toString())
             autoCompleteResponseMediator.value = emptyList()
             binding.etInput.dismissDropDown()
             viewModel.submitCurrentWeatherSearch((view as AppCompatTextView).text.toString())

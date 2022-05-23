@@ -33,6 +33,15 @@ class CurrentWeatherFragmentViewBinder(
         settingsAction()
     }
 
+    fun resetAndSaveEnteredLocation(location:String?=viewModel.enteredLocation.value, clearField: Boolean = true) {
+        location?.also {
+            viewModel.lastLocation.value = it
+        }
+        if (clearField) {
+            viewModel.updateLocationEntry("")
+        }
+    }
+
     fun goRefreshClicked() {
         input.value?.also {
             if (it.isEmpty()) {
@@ -43,6 +52,7 @@ class CurrentWeatherFragmentViewBinder(
                     .show()
             }
             else {
+                resetAndSaveEnteredLocation(clearField = false)
                 viewModel.submitCurrentWeatherSearch(it)
             }
         }

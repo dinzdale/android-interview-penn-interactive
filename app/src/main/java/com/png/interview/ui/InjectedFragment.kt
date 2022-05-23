@@ -31,7 +31,7 @@ abstract class InjectedFragment : Fragment() {
     }
 
     inline fun <reified T : ViewModel> getViewModel(): T {
-        return ViewModelProvider(this, viewModelFactory)[T::class.java].apply {
+        return ViewModelProvider(requireActivity(), viewModelFactory)[T::class.java].apply {
             if (this is LifecycleObserver) {
                 lifecycle.removeObserver(this)
                 lifecycle.addObserver(this)

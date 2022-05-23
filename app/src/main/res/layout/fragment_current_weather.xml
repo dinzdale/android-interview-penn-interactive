@@ -17,7 +17,7 @@
 			android:layout_height="wrap_content"
 			android:hint="@string/enter_zip_or_city"
 			android:text="@{viewBinder.input}"
-			android:onTextChanged="@{viewBinder.onTextChanged}"
+			android:onTextChanged="@{viewBinder::onTextChanged}"
 			app:layout_constraintEnd_toStartOf="@id/btn_go"
 			app:layout_constraintTop_toTopOf="parent"
 			app:layout_constraintStart_toStartOf="parent"/>
