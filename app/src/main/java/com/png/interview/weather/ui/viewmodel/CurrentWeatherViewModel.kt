@@ -5,6 +5,7 @@ import com.png.interview.weather.api.AutoCompleteRepository
 import com.png.interview.weather.api.ForecastRepository
 import com.png.interview.weather.api.WeatherApi
 import com.png.interview.weather.api.model.AutcompleteResponseItem
+import com.png.interview.weather.api.model.Forecastday
 import com.png.interview.weather.domain.CreateCurrentWeatherRepFromQueryUseCase
 import com.png.interview.weather.ui.model.CurrentWeatherViewRepresentation
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,7 +26,7 @@ class CurrentWeatherViewModel @Inject constructor(
     var lastLocation  = MutableStateFlow<String?>(null)
 
     private val _currentWeatherViewRepresentation = MutableStateFlow<CurrentWeatherViewRepresentation>(CurrentWeatherViewRepresentation.Empty)
-    private val _threeDayForecast = MutableStateFlow<CurrentWeatherViewRepresentation>(CurrentWeatherViewRepresentation.Empty)
+    private val _threeDayForecastResult = MutableStateFlow<CurrentWeatherViewRepresentation>(CurrentWeatherViewRepresentation.Empty)
 
     fun updateLocationEntry(text: String) {
         _enteredLocation.value = text
@@ -72,11 +73,22 @@ class CurrentWeatherViewModel @Inject constructor(
     fun getThreeDayForecast() {
         lastLocation.value?.also {
             viewModelScope.launch {
-                _threeDayForecast.value = forecastRepository.getForecast(it)
+                _threeDayForecastResult.value = forecastRepository.getForecast(it)
+                val result = _threeDayForecastResult.value
+                val list = when(result) {
+                    is CurrentWeatherViewRepresentation.ForecastWeatherViewRep->{
+                        result.data.forecastday.take(3).toCollection(mutableListOf())
+                    }
+                    else -> emptyList<Forecastday>()
+                }
+                _forecasts.value = list
             }
         }
     }
 
-    val threeDayForeCast = _threeDayForecast.asLiveData()
+    val isForecastVisible = _threeDayForecastResult
+    .map{ it is CurrentWeatherViewRepresentation.ForecastWeatherViewRep }.asLiveData()
 
+    private val _forecasts = MutableStateFlow<List<Forecastday>>(emptyList())
+    val forecasts = _forecasts.asLiveData()
 }

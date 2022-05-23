@@ -5,7 +5,7 @@ import com.png.interview.weather.ui.model.CurrentWeatherViewRepresentation
 import javax.inject.Inject
 
 class ForecastRepository  (private val weatherApi: WeatherApi) {
-    suspend fun getForecast(query:String)  = weatherApi.getForecast(query,3)?.let { response->
+    suspend fun getForecast(query:String)  = weatherApi.getForecast(query,3).let { response->
             when {
                 response is NetworkResponse.Success->{
                     CurrentWeatherViewRepresentation.ForecastWeatherViewRep(response.body.forecast)
@@ -13,5 +13,4 @@ class ForecastRepository  (private val weatherApi: WeatherApi) {
                 else -> CurrentWeatherViewRepresentation.Error
             }
         }
-
 }
