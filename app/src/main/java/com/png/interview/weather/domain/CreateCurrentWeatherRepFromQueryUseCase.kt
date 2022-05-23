@@ -17,11 +17,12 @@ class DefaultCreateCurrentWeatherRepFromQueryUseCase @Inject constructor(
     override suspend fun invoke(query: String): CurrentWeatherViewRepresentation {
         return when (val result = getCurrentWeatherDataUseCase(query)) {
             is NetworkResponse.Success -> {
+                val isMetric = sharedPreferences.getBoolean("metric", false)
                 CurrentWeatherViewRepresentation.AvailableWeatherViewRep(
                     AvailableWeatherViewData(
                         name = result.body.location.name,
                         date = result.body.location.localtime,
-                        temperature = if (sharedPreferences.getBoolean("metric", false).not()) {
+                        temperature = if (isMetric.not()) {
                             "${result.body.current.temp_f} F"
                         }
                         else {
@@ -29,7 +30,12 @@ class DefaultCreateCurrentWeatherRepFromQueryUseCase @Inject constructor(
                         },
                         condition = result.body.current.condition.text,
                         windDirection = result.body.current.wind_dir,
-                        windSpeed = "${result.body.current.gust_mph} MPH"
+                        windSpeed = if (isMetric.not()) {
+                            "${result.body.current.gust_mph} MPH"
+                        }
+                        else {
+                            "${result.body.current.gust_kph} KPH"
+                        }
                     )
                 )
             }
