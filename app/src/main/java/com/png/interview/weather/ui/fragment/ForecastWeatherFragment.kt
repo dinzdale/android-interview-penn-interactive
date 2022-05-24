@@ -17,7 +17,6 @@ class ForecastWeatherFragment : InjectedFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val viewModel = getViewModel<CurrentWeatherViewModel>()
-        // Inflate the layout for this fragment
         binder = FragmentForecastWeatherBinding.inflate(inflater, container, false).apply {
             viewBinder = ForecastWeatherFragmentViewBinder(viewModel)
         }
@@ -51,22 +50,22 @@ class ForecastWeatherFragment : InjectedFragment() {
         val isMetric = sharedPreferences.getBoolean("metric", false)
         container.date_value.text = forecastDay.date
         container.min_tmp_value.text = if (isMetric.not()) {
-            "${forecastDay.day.mintemp_f.toString()}F"
+            "${forecastDay.day.mintemp_f}F"
         }
         else {
-            "${forecastDay.day.mintemp_c.toString()}C"
+            "${forecastDay.day.mintemp_c}C"
         }
         container.max_tmp_value.text = if (isMetric.not()) {
-            "${forecastDay.day.maxtemp_f.toString()}F"
+            "${forecastDay.day.maxtemp_f}F"
         }
         else {
-            "${forecastDay.day.maxtemp_c.toString()}C"
+            "${forecastDay.day.maxtemp_c}C"
         }
         container.wind_speed_value.text = if (isMetric.not()) {
-            "${forecastDay.day.maxwind_mph.toString()} MPH"
+            "${forecastDay.day.maxwind_mph} MPH"
         }
         else {
-            "${forecastDay.day.maxwind_mph.toString()} KPH"
+            "${forecastDay.day.maxwind_mph} KPH"
         }
         container.condition_value.text = forecastDay.day.condition.text
     }

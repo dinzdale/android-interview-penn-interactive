@@ -29,7 +29,7 @@ class CurrentWeatherFragment : InjectedFragment() {
                     findNavController().navigate(CurrentWeatherFragmentDirections.actionCurrentWeatherFragmentToSettingsFragment())
                 },
                 forecastAction = {
-                    viewBinder?.resetAndSaveEnteredLocation(null,clearField = true)
+                    viewBinder?.resetAndSaveEnteredLocation(null, clearField = true)
                     findNavController().navigate(CurrentWeatherFragmentDirections.actionCurrentWeatherFragmentToForecastWeatherFragment())
                 }
             )
