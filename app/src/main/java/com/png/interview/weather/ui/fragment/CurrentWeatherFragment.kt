@@ -13,14 +13,14 @@ import com.png.interview.databinding.FragmentCurrentWeatherBinding
 import com.png.interview.ui.InjectedFragment
 import com.png.interview.weather.api.model.AutcompleteResponseItem
 import com.png.interview.weather.ui.binder.CurrentWeatherFragmentViewBinder
-import com.png.interview.weather.ui.viewmodel.CurrentWeatherViewModel
+import com.png.interview.weather.ui.viewmodel.WeatherViewModel
 
 class CurrentWeatherFragment : InjectedFragment() {
 
     val autoCompleteResponseMediator =  MediatorLiveData<List<AutcompleteResponseItem>>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val viewModel = getViewModel<CurrentWeatherViewModel>()
+        val viewModel = getViewModel<WeatherViewModel>()
         val binding =  FragmentCurrentWeatherBinding.inflate(inflater, container,false).apply {
             viewBinder = CurrentWeatherFragmentViewBinder(
                 viewModel,

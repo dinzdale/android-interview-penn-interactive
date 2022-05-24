@@ -8,7 +8,7 @@ import com.png.interview.databinding.FragmentForecastWeatherBinding
 import com.png.interview.ui.InjectedFragment
 import com.png.interview.weather.api.model.Forecastday
 import com.png.interview.weather.ui.binder.ForecastWeatherFragmentViewBinder
-import com.png.interview.weather.ui.viewmodel.CurrentWeatherViewModel
+import com.png.interview.weather.ui.viewmodel.WeatherViewModel
 import kotlinx.android.synthetic.main.forecast_item.view.*
 import kotlinx.android.synthetic.main.fragment_forecast_weather.view.*
 
@@ -16,7 +16,7 @@ class ForecastWeatherFragment : InjectedFragment() {
     lateinit var binder: FragmentForecastWeatherBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val viewModel = getViewModel<CurrentWeatherViewModel>()
+        val viewModel = getViewModel<WeatherViewModel>()
         binder = FragmentForecastWeatherBinding.inflate(inflater, container, false).apply {
             viewBinder = ForecastWeatherFragmentViewBinder(viewModel)
         }

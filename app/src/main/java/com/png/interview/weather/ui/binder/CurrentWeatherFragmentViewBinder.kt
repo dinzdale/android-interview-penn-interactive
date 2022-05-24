@@ -1,11 +1,11 @@
 package com.png.interview.weather.ui.binder
 import android.app.Activity
 import android.widget.Toast
-import com.png.interview.weather.ui.viewmodel.CurrentWeatherViewModel
+import com.png.interview.weather.ui.viewmodel.WeatherViewModel
 
 
 class CurrentWeatherFragmentViewBinder(
-    private val viewModel: CurrentWeatherViewModel,
+    private val viewModel: WeatherViewModel,
     private val activity: Activity,
     private val settingsAction: () -> Unit,
     private val forecastAction: () -> Unit,
