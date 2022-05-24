@@ -15,12 +15,17 @@
 			android:id="@+id/et_input"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
+			android:layout_marginStart="4dp"
 			android:hint="@string/enter_zip_or_city"
-			android:text="@{viewBinder.input}"
+			android:lines="1"
 			android:onTextChanged="@{viewBinder::onTextChanged}"
+			android:singleLine="true"
+			android:text="@{viewBinder.input}"
+			android:textAlignment="viewStart"
+			android:textSize="14sp"
 			app:layout_constraintEnd_toStartOf="@id/btn_go"
-			app:layout_constraintTop_toTopOf="parent"
-			app:layout_constraintStart_toStartOf="parent"/>
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
 
 		<com.google.android.material.button.MaterialButton
 			android:id="@+id/btn_go"

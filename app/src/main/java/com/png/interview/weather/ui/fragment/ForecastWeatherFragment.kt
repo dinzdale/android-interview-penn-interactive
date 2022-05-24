@@ -66,7 +66,7 @@ class ForecastWeatherFragment : InjectedFragment() {
             "${forecastDay.day.maxwind_mph.toString()} MPH"
         }
         else {
-            "${forecastDay.day.maxwind_mph.toString()} KMH"
+            "${forecastDay.day.maxwind_mph.toString()} KPH"
         }
         container.condition_value.text = forecastDay.day.condition.text
     }

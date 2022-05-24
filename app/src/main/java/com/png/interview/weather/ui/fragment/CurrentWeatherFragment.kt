@@ -29,6 +29,7 @@ class CurrentWeatherFragment : InjectedFragment() {
                     findNavController().navigate(CurrentWeatherFragmentDirections.actionCurrentWeatherFragmentToSettingsFragment())
                 },
                 forecastAction = {
+                    viewBinder?.resetAndSaveEnteredLocation(null,clearField = true)
                     findNavController().navigate(CurrentWeatherFragmentDirections.actionCurrentWeatherFragmentToForecastWeatherFragment())
                 }
             )
@@ -46,15 +47,15 @@ class CurrentWeatherFragment : InjectedFragment() {
             }
         }
         autoCompleteResponseMediator.observe(viewLifecycleOwner) {
-            val results = it.map { it.name }.take(5)
+            val results = it.take(5).map { "${it.name}, ${it.region}, ${it.country} " }
             val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1)
             adapter.addAll(results)
             binding.etInput.setAdapter(adapter)
             binding.etInput.showDropDown()
         }
 
-        binding.etInput.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, i, l ->
-            binding.viewBinder?.resetAndSaveEnteredLocation(binding.etInput.editableText.toString())
+        binding.etInput.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, index, l ->
+            binding.viewBinder?.resetAndSaveEnteredLocation(autoCompleteResponseMediator.value?.get(index)?.name?:"")
             autoCompleteResponseMediator.value = emptyList()
             binding.etInput.dismissDropDown()
             viewModel.submitCurrentWeatherSearch((view as AppCompatTextView).text.toString())
