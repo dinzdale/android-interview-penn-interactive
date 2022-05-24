@@ -42,7 +42,7 @@ class CurrentWeatherFragmentViewBinder(
         }
     }
 
-    fun goRefreshClicked() {
+    fun goClicked() {
         input.value?.also {
             if (it.isEmpty()) {
                 Toast.makeText(activity, "Please Enter Query", Toast.LENGTH_LONG).show()
@@ -57,6 +57,12 @@ class CurrentWeatherFragmentViewBinder(
             }
         }
     }
+    fun refreshClicked() {
+        viewModel.lastLocation.value?.also {
+            viewModel.submitCurrentWeatherSearch(it)
+        }
+    }
+
 
     fun onTextChanged(text: CharSequence, start: Int, before: Int, count: Int) {
         viewModel.updateLocationEntry(text.toString())

@@ -36,16 +36,17 @@
             <include
                 android:id="@+id/day_1"
                 layout="@layout/forecast_item"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/forecast_title"
                 app:layout_constraintTop_toBottomOf="@+id/forecast_title" />
 
             <include
                 android:id="@+id/day_2"
                 layout="@layout/forecast_item"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 app:layout_constraintEnd_toEndOf="@+id/day_1"
@@ -55,9 +56,10 @@
             <include
                 android:id="@+id/day_3"
                 layout="@layout/forecast_item"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="@+id/day_2"
                 app:layout_constraintStart_toStartOf="@+id/day_2"
                 app:layout_constraintTop_toBottomOf="@+id/day_2" />
 
