@@ -63,10 +63,10 @@ class ForecastWeatherFragment : InjectedFragment() {
             "${forecastDay.day.maxtemp_c.toString()}C"
         }
         container.wind_speed_value.text = if (isMetric.not()) {
-            "${forecastDay.day.maxwind_mph.toString()}F"
+            "${forecastDay.day.maxwind_mph.toString()} MPH"
         }
         else {
-            "${forecastDay.day.maxwind_mph.toString()}C"
+            "${forecastDay.day.maxwind_mph.toString()} KMH"
         }
         container.condition_value.text = forecastDay.day.condition.text
     }
